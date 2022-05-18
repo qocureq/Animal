@@ -9,8 +9,8 @@ class animal
 public:
     animal(string _name, size_t _age)
     {
-        this->name = move(_name);
-        this->age = _age;
+        name = move(_name);
+        age = _age;
     }
 
     virtual void print()
@@ -20,8 +20,22 @@ public:
         cout << "Age:\t" << age << endl;
     }
 
+    virtual void print(ostream &os)
+    {
+        os << "\n[" << species << "]" << endl;
+        os << "Name:\t" << name << endl;
+        os << "Age:\t" << age <<  endl;
+    }
+
 protected:
     string name;
     size_t age;
     string species = "Animal";
 };
+
+
+inline ostream &operator<<(ostream &os, animal &animal)
+{
+    animal.print();
+    return os;
+}
